@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Add a WMS source</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<div id='map'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiY29sbGFicHJvamVjdDE5MDgiLCJhIjoiY2p0ZWdwMjl1MWhsYzQ5bzlvdzBmOW13OCJ9.e9FtSFxY-nswnnCgtFXonA';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/light-v10',
+    zoom: 8,
+    center: [-74.5447, 40.6892]
+});
+
+map.on('load', function() {
+
+    map.addLayer({
+        'id': 'Guelph_Test',
+        'type': 'fill',
+        'source': {
+            'type': 'vector',
+            'tiles': [
+                'http://35.182.237.194:8080/geoserver/gwc/demo/openstatstest:Guelph_Test?gridSet=EPSG:4326&format=image/png'
+            ],
+            'tileSize': 512
+        },
+		// not sure what to add for source layer
+		'source-layer': 'openstatstest',
+        'paint': {}
+    }, 'aeroway-line');
+});
+</script>
+
+</body>
+</html>
